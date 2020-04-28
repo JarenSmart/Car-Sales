@@ -38,9 +38,11 @@ export const indexReducer = (state = initialState, action) => {
         additionalPrice: state.additionalPrice - action.payload.price,
         car: {
           ...state.car,
-          features: state.features.filter((item) => item !== action.payload),
+          features: state.car.features.filter((item) => {
+            return item !== action.payload;
+          }),
         },
-        additionalFeatures: [...state.car.additionalFeatures, action.payload],
+        additionalFeatures: [...state.additionalFeatures, action.payload],
       };
     default:
       return state;

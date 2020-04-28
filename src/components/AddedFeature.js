@@ -3,15 +3,13 @@ import { connect } from "react-redux";
 import { removeFeature } from "../actions/actions";
 
 const AddedFeature = (props) => {
-  const remove = (e) => {
-    e.preventDefault();
-    props.remove(props.feature);
-  };
-
   return (
     <li>
       {/* Add an onClick to run a function to remove a feature */}
-      <button className="button" onClick={remove}>
+      <button
+        className="button"
+        onClick={() => props.removeFeature(props.feature)}
+      >
         X
       </button>
       {props.feature.name}
