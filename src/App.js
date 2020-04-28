@@ -4,20 +4,33 @@ import Header from "./components/Header";
 import AddedFeatures from "./components/AddedFeatures";
 import AdditionalFeatures from "./components/AdditionalFeatures";
 import Total from "./components/Total";
+import { connect } from "react-redux";
 
-const App = () => {
+const App = (props) => {
   return (
     <div className="boxes">
       <div className="box">
-        <Header car={state.car} />
-        <AddedFeatures car={state.car} />
+        <Header car={props.car} />
+        <AddedFeatures />
       </div>
       <div className="box">
-        <AdditionalFeatures additionalFeatures={state.additionalFeatures} />
-        <Total car={state.car} additionalPrice={state.additionalPrice} />
+        <AdditionalFeatures />
+        <Total />
       </div>
     </div>
   );
 };
 
-export default App;
+//wrap the component export in the connect function
+//call connect twice!
+//Pass the component that we want to connect into the second call (Header)
+//The first call will take in a function and an object
+const mapStateToProps = (state) => {
+  return {
+    car: state.car,
+    additionalPrice: state.additionalPrice,
+    additionalFeatures: state.additionalFeatures,
+  };
+};
+
+export default connect(mapStateToProps)(App);
